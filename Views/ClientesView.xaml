@@ -5,8 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:local="clr-namespace:Warehouse.Views"
+             xmlns:vm="clr-namespace:Warehouse.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.DataContext>
+        <vm:ClientesVM />
+    </UserControl.DataContext>
+    
+    
+    
     <Grid Margin="10">
         
         <Grid.RowDefinitions>
@@ -20,14 +28,14 @@
 
         <StackPanel Grid.Row="1">
             <StackPanel  Margin="0 0 0 20" HorizontalAlignment="center"  Orientation="Horizontal">
-                <TextBox  VerticalContentAlignment="center" Width="300" Height="30" mah:TextBoxHelper.Watermark="Nome"/>
-                <TextBox VerticalContentAlignment="center" Margin="20 0" Width="300" Height="30" mah:TextBoxHelper.Watermark="Telefone"/>
-                <TextBox VerticalContentAlignment="center" Width="300" Height="30" mah:TextBoxHelper.Watermark="CPF/CNPJ"/>
+                <TextBox Text="{Binding Nome, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="center" Width="300" Height="30" mah:TextBoxHelper.Watermark="Nome"/>
+                <TextBox Text="{Binding Tel, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="center" Margin="20 0" Width="300" Height="30" mah:TextBoxHelper.Watermark="Telefone"/>
+                <TextBox Text="{Binding Doc, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="center" Width="300" Height="30" mah:TextBoxHelper.Watermark="CPF/CNPJ"/>
             </StackPanel>
 
             <StackPanel Margin="0 0 0 20" Orientation="Horizontal" HorizontalAlignment="center" >
-                <Button Height="30" Width="100"  Content="Adicionar" Cursor="Hand" />
-                <Button Height="30" Width="100" Margin="20 0 0 0" Content="Remover" Cursor="Hand" />
+                <Button Height="30" Width="100"  Content="Adicionar" Cursor="Hand" Command="{Binding AddCustomerCommand}"/>
+                <Button Height="30" Width="100" Margin="20 0 0 0" Content="Remover" Cursor="Hand" Command="{Binding RemoveCustomerCommand}"/>
             </StackPanel>
         </StackPanel>
 
@@ -38,11 +46,11 @@
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   CanUserDeleteRows="False"
-                  IsReadOnly="True">
+                  IsReadOnly="True" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
                 <DataGridTextColumn Header="Nome" Binding="{Binding Nome}" Width="*"/>
-                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="200"/>
+                <DataGridTextColumn Header="Telefone" Binding="{Binding Tel}" Width="200"/>
+                <DataGridTextColumn Header="CPF/CNPJ" Binding="{Binding Doc}" Width="200"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

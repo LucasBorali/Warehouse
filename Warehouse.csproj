@@ -9,8 +9,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\cargo-truck.png" />
+    <None Remove="Assets\customer.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="MahApps.Metro" Version="2.4.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.9" />
+    <PackageReference Include="SQLite" Version="3.13.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\cargo-truck.png" />
+    <Resource Include="Assets\customer.png" />
   </ItemGroup>
 
 </Project>
