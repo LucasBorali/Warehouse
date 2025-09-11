@@ -27,7 +27,7 @@ namespace Warehouse
                         this.HamburguerMenuControl.Content = new ClientesView();
                         break;
                     case "Movimentações":
-                        //this.HamburguerMenuControl.Content = new MovimentacoesView();
+                        this.HamburguerMenuControl.Content = new DockView();
                         break;
                 }
             }

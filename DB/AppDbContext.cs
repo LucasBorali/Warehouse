@@ -6,7 +6,8 @@ namespace Warehouse.DB
     public class AppDbContext : DbContext
     {
         public DbSet<Customer> Customers { get; set; }
-       
+        public DbSet<Dock> DockLogs { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data Source=warehouse.db");

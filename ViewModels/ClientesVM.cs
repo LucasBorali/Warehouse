@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using System.Windows;
 using Warehouse.DB;
@@ -12,7 +13,9 @@ namespace Warehouse.ViewModels
         
         public ClientesVM()
         {
-          
+            var context = new AppDbContext();
+            context.Database.EnsureCreated();
+
             _ = LoadCustomers();
         }
         [ObservableProperty]
