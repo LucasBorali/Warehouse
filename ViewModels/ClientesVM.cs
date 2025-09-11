@@ -9,11 +9,10 @@ namespace Warehouse.ViewModels
 {
     public partial class ClientesVM : ObservableObject
     {
-        private readonly AppDbContext _context;
+        
         public ClientesVM()
         {
-            _context = new AppDbContext();
-            _context.Database.EnsureCreated();
+          
             _ = LoadCustomers();
         }
         [ObservableProperty]
@@ -32,6 +31,21 @@ namespace Warehouse.ViewModels
         private Customer selectedCustomer;
 
         //comandos
+
+        partial void OnSelectedCustomerChanged(Customer? value)
+        {
+            if(value != null)
+            {
+                Nome = value.Nome;
+                Tel = value.Tel;
+                Doc = value.Doc;
+            }
+        }
+
+
+
+
+
         [RelayCommand]
         private async Task AddCustomer()
         {
@@ -43,7 +57,7 @@ namespace Warehouse.ViewModels
                     Tel = Tel,
                     Doc = Doc
                 };
-                await _context.AddAsyncData(newCustomer);
+                await DbExtensions.AddAsyncData(newCustomer);
                 await LoadCustomers();
                 // Limpar os campos após adicionar
                 CleanFields();
@@ -60,7 +74,7 @@ namespace Warehouse.ViewModels
         {
             if (SelectedCustomer != null)
             {
-                await _context.DeleteAsync(SelectedCustomer);
+                await DbExtensions.DeleteAsync(SelectedCustomer);
                 await LoadCustomers();
                 // Limpar os campos após remover
                 CleanFields();
@@ -71,9 +85,28 @@ namespace Warehouse.ViewModels
             }
         }
 
+        [RelayCommand]
+        private async Task UpdateCustomer()
+        {
+            if (SelectedCustomer != null && !string.IsNullOrWhiteSpace(Nome) && !string.IsNullOrWhiteSpace(Tel) && !string.IsNullOrWhiteSpace(Doc))
+            {
+                SelectedCustomer.Nome = Nome;
+                SelectedCustomer.Tel = Tel;
+                SelectedCustomer.Doc = Doc;
+                await DbExtensions.UpdateAsync(SelectedCustomer);
+                await LoadCustomers();
+                // Limpar os campos após atualizar
+                CleanFields();
+            }
+            else
+            {
+                MessageBox.Show("Por favor, selecione um cliente e preencha todos os campos para atualizar.");
+            }
+        }
+
         private async Task LoadCustomers()
         {
-            var list = await _context.GetAllAsync<Customer>();
+            var list = await DbExtensions.GetAllAsync<Customer>();
             Customers.Clear();
             foreach (var customer in list)
             {
@@ -88,6 +121,7 @@ namespace Warehouse.ViewModels
             Nome = string.Empty;
             Tel = string.Empty;
             Doc = string.Empty;
+            SelectedCustomer = null;
         }
 
 

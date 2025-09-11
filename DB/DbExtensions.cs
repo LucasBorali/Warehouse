@@ -6,8 +6,9 @@ namespace Warehouse.DB
     public static class DbExtensions
     {
 
-        public static async Task<List<T>> GetAllAsync<T>(this AppDbContext context) where T : class
+        public static async Task<List<T>> GetAllAsync<T>() where T : class
         {
+            var context = new AppDbContext();
             try
             {
                 return await context.Set<T>().AsNoTracking().ToListAsync();
@@ -20,8 +21,9 @@ namespace Warehouse.DB
             }
         }
 
-        public static async Task AddAsyncData<T>(this AppDbContext context, T entity) where T : class
+        public static async Task AddAsyncData<T>(T entity) where T : class
         {
+            var context = new AppDbContext();
             try
             {
                 context.Set<T>().Add(entity);
@@ -33,11 +35,13 @@ namespace Warehouse.DB
             }
         }
 
-        public static async Task UpdateAsync<T>(this AppDbContext context, T entity) where T : class
+        public static async Task UpdateAsync<T>( T entity) where T : class
         {
+            using var context = new AppDbContext();
             try
             {
-                context.Set<T>().Update(entity);
+                context.Set<T>().Attach(entity);
+                context.Entry(entity).State = EntityState.Modified;
                 await context.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -46,8 +50,9 @@ namespace Warehouse.DB
             }
         }
 
-        public static async Task DeleteAsync<T>(this AppDbContext context, T entity) where T : class
+        public static async Task DeleteAsync<T>( T entity) where T : class
         {
+            var context = new AppDbContext();
             try
             {
                 context.Set<T>().Remove(entity);
