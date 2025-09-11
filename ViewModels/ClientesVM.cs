@@ -43,7 +43,7 @@ namespace Warehouse.ViewModels
                     Tel = Tel,
                     Doc = Doc
                 };
-                await _context.AddAsync(newCustomer);
+                await _context.AddAsyncData(newCustomer);
                 await LoadCustomers();
                 // Limpar os campos após adicionar
                 CleanFields();
