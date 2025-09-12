@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Warehouse.Views.DockView"
+﻿<UserControl x:Class="Warehouse.Views.InputView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,12 +11,9 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.DataContext>
-        <vm:DockVM />
+        <vm:InputVM />
     </UserControl.DataContext>
 
-    <UserControl.Resources>
-        <utils:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
-    </UserControl.Resources>
     
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -26,13 +23,11 @@
         </Grid.RowDefinitions>
 
         <!-- Cabeçalho -->
-        <Label Content="Movimentações" FontSize="20" VerticalContentAlignment="Center" FontWeight="Bold" Foreground="#F1F1F1"/>
+        <Label Content="Entrada" FontSize="20" VerticalContentAlignment="Center" FontWeight="Bold" Foreground="#F1F1F1"/>
         
         <!-- Form -->
         <StackPanel Grid.Row="1"  >
             <StackPanel Orientation="Horizontal" HorizontalAlignment="center">
-                <!-- Tipos: Entrada || Saída -->
-                <ComboBox Height="30" Width="200" VerticalAlignment="Center" SelectedIndex="0" ItemsSource="{Binding TransactionTypes}" SelectedValue="{Binding SelectedTransactionType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 
                 <!-- Data da Movimentação -->
                 <DatePicker Margin="15 0" Width="125" SelectedDate="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -44,18 +39,15 @@
             <StackPanel Margin="0 15" Orientation="Horizontal" HorizontalAlignment="center">
                  <!-- Produtor (clientes) -->
                 <ComboBox Margin="0 0 15 0" Height="30" Width="200" VerticalContentAlignment="Center" IsEditable="True" mah:TextBoxHelper.Watermark="Selecione o Produtor" ItemsSource="{Binding Producers}" SelectedValue="{Binding Producer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Nome" DisplayMemberPath="Nome" />
-                
-                <!-- Buyer (em caso de Saída) -->
-                <TextBox Text="{Binding Buyer, UpdateSourceTrigger=PropertyChanged}" Height="30"  Width="200" Visibility="{Binding SelectedTransactionType, Converter={StaticResource StringToVisibilityConverter}, ConverterParameter=Saída}" mah:TextBoxHelper.Watermark="Comprador" />
-                
+                          
                 <!-- Impureza (em caso de Entrada) -->
                 
-                <TextBox Text="{Binding Impureza, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="200" Visibility="{Binding SelectedTransactionType, Converter={StaticResource StringToVisibilityConverter}, ConverterParameter=Entrada}" mah:TextBoxHelper.Watermark="Impureza" />
+                <TextBox Text="{Binding Impureza, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="200" mah:TextBoxHelper.Watermark="Impureza" />
         </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="center">
                 <!-- Umidade (em caso de Entrada) -->
                 
-                <TextBox Text="{Binding Umidade, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="200" Visibility="{Binding SelectedTransactionType, Converter={StaticResource StringToVisibilityConverter}, ConverterParameter=Entrada}" mah:TextBoxHelper.Watermark="Umidade" />
+                <TextBox Text="{Binding Umidade, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="200" mah:TextBoxHelper.Watermark="Umidade" />
                 <!-- Peso -->
                 <TextBox Text="{Binding Peso, UpdateSourceTrigger=PropertyChanged}" Margin="15 0" Height="30" Width="200" mah:TextBoxHelper.Watermark="Peso" />
                 
@@ -64,7 +56,25 @@
 
             </StackPanel>
 
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 15 0 0">
+                <Button Content="Adicionar" Cursor="Hand" Command="{Binding AddInputLogCommand}"/>
+            </StackPanel>
+
         </StackPanel>
+
+        <!-- Lista de clientes -->
+        <DataGrid x:Name="ClientesDataGrid" Grid.Row="2"
+          
+          Margin="15"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          IsReadOnly="True" ItemsSource="{Binding InputLogs}" >
+            
+            
+            
+            
+           
+        </DataGrid>
 
     </Grid>
 </UserControl>

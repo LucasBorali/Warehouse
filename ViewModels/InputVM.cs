@@ -12,27 +12,18 @@ using Warehouse.Models;
 
 namespace Warehouse.ViewModels
 {
-    public partial class DockVM : ObservableObject
+    public partial class InputVM : ObservableObject
     {
 
-        public DockVM()
+        public InputVM()
         {
             var context = new AppDbContext();
             context.Database.EnsureCreated();
 
+
             _ = LoadProducers();
-            _ = LoadDockLogs();
+            _ = LoadInputLogs();
         }
-
-        [ObservableProperty]
-        private ObservableCollection<string> transactionTypes = new ObservableCollection<string>
-        {
-            "Entrada",
-            "Saída",
-        };
-
-        [ObservableProperty]
-        private string selectedTransactionType;
 
         [ObservableProperty]
         private DateTime date = DateTime.Now;
@@ -44,7 +35,10 @@ namespace Warehouse.ViewModels
         private ObservableCollection<Customer> producers = new ObservableCollection<Customer>();
 
         [ObservableProperty]
-        private ObservableCollection<Dock> dockLogs = new ObservableCollection<Dock>();
+        private string producer;
+
+        [ObservableProperty]
+        private ObservableCollection<Input> inputLogs = new ObservableCollection<Input>();
 
         private async Task LoadProducers()
         {
@@ -57,19 +51,15 @@ namespace Warehouse.ViewModels
            
         }
 
-        private async Task LoadDockLogs()
+        private async Task LoadInputLogs()
         {
-            var docks = await DbExtensions.GetAllAsync<Dock>();
-            DockLogs.Clear();
+            var docks = await DbExtensions.GetAllAsync<Input>();
+            InputLogs.Clear();
             foreach (var dock in docks)
             {
-                DockLogs.Add(dock);
+                InputLogs.Add(dock);
             }
         }
-
-
-
-
 
         [ObservableProperty]
         private string peso;
@@ -77,16 +67,24 @@ namespace Warehouse.ViewModels
         [ObservableProperty]
         private string ticket;
 
-        //Opcionais
-
-        [ObservableProperty]
-        private string buyer;
-
         [ObservableProperty]
         private string impureza;
 
         [ObservableProperty]
         private string umidade;
+
+
+        //Funções
+
+        [RelayCommand]
+        private async Task AddInputLog()
+        {
+            if (string.IsNullOrWhiteSpace(Plate) || string.IsNullOrWhiteSpace(Peso) || string.IsNullOrWhiteSpace(Ticket) || string.IsNullOrWhiteSpace(Impureza) || string.IsNullOrWhiteSpace(Umidade))
+            {
+                MessageBox.Show("Por favor, preencha todos os campos.");
+                return;
+            }
+        }
 
 
 

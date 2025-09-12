@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Warehouse.Views
 {
     /// <summary>
-    /// Interaction logic for DockView.xaml
+    /// Interaction logic for OutputView.xaml
     /// </summary>
-    public partial class DockView : UserControl
+    public partial class OutputView : UserControl
     {
-        public DockView()
+        public OutputView()
         {
             InitializeComponent();
         }

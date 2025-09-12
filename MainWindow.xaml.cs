@@ -14,7 +14,7 @@ namespace Warehouse
         public MainWindow()
         {
             InitializeComponent();
-            this.HamburguerMenuControl.Content = new ClientesView();
+            this.HamburguerMenuControl.Content = new InputView();
         }
 
         private void HamburgerMenuControl_OnItemInvoked(object sender, HamburgerMenuItemInvokedEventArgs e)
@@ -26,8 +26,11 @@ namespace Warehouse
                     case "Clientes":
                         this.HamburguerMenuControl.Content = new ClientesView();
                         break;
-                    case "Movimentações":
-                        this.HamburguerMenuControl.Content = new DockView();
+                    case "Entrada":
+                        this.HamburguerMenuControl.Content = new InputView();
+                        break;
+                    case "Saída":
+                        this.HamburguerMenuControl.Content = new OutputView();
                         break;
                 }
             }

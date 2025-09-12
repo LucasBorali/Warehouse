@@ -6,7 +6,8 @@ namespace Warehouse.DB
     public class AppDbContext : DbContext
     {
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Dock> DockLogs { get; set; }
+        public DbSet<Input> InputLogs { get; set; }
+        public DbSet<Output> OutputLogs { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

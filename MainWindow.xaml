@@ -79,7 +79,8 @@
 
         <mah:HamburgerMenu.ItemsSource>
             <mah:HamburgerMenuItemCollection>
-                <mah:HamburgerMenuGlyphItem Glyph="pack://application:,,,/Assets/cargo-truck.png" Label="Movimentações" />
+                <mah:HamburgerMenuGlyphItem Glyph="pack://application:,,,/Assets/input.png" Label="Entrada" />
+                <mah:HamburgerMenuGlyphItem Glyph="pack://application:,,,/Assets/output.png" Label="Saída" />
                 <mah:HamburgerMenuGlyphItem Glyph="pack://application:,,,/Assets/customer.png" Label="Clientes" />
             </mah:HamburgerMenuItemCollection>
         </mah:HamburgerMenu.ItemsSource>

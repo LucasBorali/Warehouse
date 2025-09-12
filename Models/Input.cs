@@ -1,17 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
+
 
 
 namespace Warehouse.Models
 {
-    public class Dock
+    public class Input
     {
 
         [Key]
         public int Id { get; set; }
-
-        [Required]
-        public string SelectedTransactionType { get; set; }
 
         [Required]
        public DateTime Date { get; set; }
@@ -26,15 +23,11 @@ namespace Warehouse.Models
         [Required]
        public string Ticket { get; set; }
 
-        //Opcionais
 
-        [AllowNull]
-       public string Buyer { get; set; }
-
-        [AllowNull]
+        [Required]
        public string Impureza { get; set; }
 
-        [AllowNull]
+        [Required]
        public string Umidade { get; set; }
 
 
