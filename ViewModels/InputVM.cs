@@ -79,11 +79,45 @@ namespace Warehouse.ViewModels
         [RelayCommand]
         private async Task AddInputLog()
         {
-            if (string.IsNullOrWhiteSpace(Plate) || string.IsNullOrWhiteSpace(Peso) || string.IsNullOrWhiteSpace(Ticket) || string.IsNullOrWhiteSpace(Impureza) || string.IsNullOrWhiteSpace(Umidade))
+
+            
+            
+            if (!string.IsNullOrWhiteSpace(Plate) || !string.IsNullOrWhiteSpace(Peso) || !string.IsNullOrWhiteSpace(Ticket!) || string.IsNullOrWhiteSpace(Impureza) || !string.IsNullOrWhiteSpace(Umidade))
             {
+                var finalDate = Date.Date == DateTime.Today ? DateTime.Now : Date;
+
+                var InputLog = new Input
+                {
+                    Date = finalDate,
+                    Plate = Plate,
+                    Producer = Producer,
+                    Peso = Peso,
+                    Ticket = Ticket,
+                    Impureza = Impureza,
+                    Umidade = Umidade
+                };
+
+                await DbExtensions.AddAsyncData(InputLog);
+                await LoadInputLogs();
+                ClearFields();
+
+            }
+            else {
+
                 MessageBox.Show("Por favor, preencha todos os campos.");
                 return;
             }
+        }
+
+        public void ClearFields()
+        {
+            Date = DateTime.Now;
+            Plate = string.Empty;
+            Peso = string.Empty;
+            Producer = string.Empty;
+            Ticket = string.Empty;
+            Impureza = string.Empty;
+            Umidade = string.Empty;
         }
 
 

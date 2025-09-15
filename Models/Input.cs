@@ -16,6 +16,8 @@ namespace Warehouse.Models
         [Required]
        public string Plate { get; set; }
 
+        [Required]
+        public string Producer { get; set; }
 
         [Required]
        public string Peso { get; set; }

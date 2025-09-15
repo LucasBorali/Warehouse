@@ -31,9 +31,7 @@
         <!-- Form -->
         <StackPanel Grid.Row="1"  >
             <StackPanel Orientation="Horizontal" HorizontalAlignment="center">
-                <!-- Tipos: Entrada || Saída -->
-                <ComboBox Height="30" Width="200" VerticalAlignment="Center" SelectedIndex="0" ItemsSource="{Binding TransactionTypes}" SelectedValue="{Binding SelectedTransactionType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
+          
                 <!-- Data da Movimentação -->
                 <DatePicker Margin="15 0" Width="125" SelectedDate="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
@@ -43,7 +41,7 @@
 
             <StackPanel Margin="0 15" Orientation="Horizontal" HorizontalAlignment="center">
                 <!-- Produtor (clientes) -->
-                <ComboBox Margin="0 0 15 0" Height="30" Width="200" VerticalContentAlignment="Center" IsEditable="True" mah:TextBoxHelper.Watermark="Selecione o Produtor" ItemsSource="{Binding Producers}" SelectedValue="{Binding Producer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Nome" DisplayMemberPath="Nome" />
+                <ComboBox Margin="0 0 15 0" Height="30" Width="200" VerticalContentAlignment="Center" IsEditable="True" mah:TextBoxHelper.Watermark="Selecione o Produtor" ItemsSource="{Binding InputLogs}" SelectedValue="{Binding Producer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Producer" DisplayMemberPath="Producer" />
 
                 <!-- Buyer (em caso de Saída) -->
                 <TextBox Text="{Binding Buyer, UpdateSourceTrigger=PropertyChanged}" Height="30"  Width="200" mah:TextBoxHelper.Watermark="Comprador" />
@@ -55,6 +53,7 @@
                 <TextBox Text="{Binding Peso, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 15 0" Height="30" Width="200" mah:TextBoxHelper.Watermark="Peso" />
 
                 <!-- Ticket de pesagem -->
+                <ComboBox Height="30" Width="200" mah:TextBoxHelper.Watermark="Ticket" VerticalContentAlignment="Center" IsEditable="True" ItemsSource="{Binding InputLogs}" SelectedValue="{Binding Ticket, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Ticket" DisplayMemberPath="Ticket"/>
                 <TextBox Text="{Binding Ticket, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="200" mah:TextBoxHelper.Watermark="Ticket"/>
 
             </StackPanel>

@@ -68,12 +68,14 @@
           Margin="15"
           CanUserAddRows="False"
           CanUserDeleteRows="False"
-          IsReadOnly="True" ItemsSource="{Binding InputLogs}" >
-            
-            
-            
-            
-           
+          IsReadOnly="True" ItemsSource="{Binding InputLogs}"
+              AutoGenerateColumns="True"
+                 ColumnWidth="*"
+                  HorizontalAlignment="Stretch"
+                  >
+
+
+
         </DataGrid>
 
     </Grid>
