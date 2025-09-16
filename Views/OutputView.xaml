@@ -41,7 +41,7 @@
 
             <StackPanel Margin="0 15" Orientation="Horizontal" HorizontalAlignment="center">
                 <!-- Produtor (clientes) -->
-                <ComboBox Margin="0 0 15 0" Height="30" Width="200" VerticalContentAlignment="Center" IsEditable="True" mah:TextBoxHelper.Watermark="Selecione o Produtor" ItemsSource="{Binding InputLogs}" SelectedValue="{Binding Producer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Producer" DisplayMemberPath="Producer" />
+                <ComboBox Margin="0 0 15 0" Height="30" Width="200" VerticalContentAlignment="Center" IsEditable="True" mah:TextBoxHelper.Watermark="Selecione o Produtor" ItemsSource="{Binding InputLogs}" SelectedItem="{Binding SelectedInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Producer" DisplayMemberPath="Producer" />
 
                 <!-- Buyer (em caso de Saída) -->
                 <TextBox Text="{Binding Buyer, UpdateSourceTrigger=PropertyChanged}" Height="30"  Width="200" mah:TextBoxHelper.Watermark="Comprador" />
@@ -53,7 +53,7 @@
                 <TextBox Text="{Binding Peso, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 15 0" Height="30" Width="200" mah:TextBoxHelper.Watermark="Peso" />
 
                 <!-- Ticket de pesagem -->
-                <ComboBox Height="30" Width="200" mah:TextBoxHelper.Watermark="Ticket" VerticalContentAlignment="Center" IsEditable="True" ItemsSource="{Binding InputLogs}" SelectedValue="{Binding Ticket, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Ticket" DisplayMemberPath="Ticket"/>
+                <ComboBox Height="30" Width="200" mah:TextBoxHelper.Watermark="Ticket" VerticalContentAlignment="Center" IsEditable="True" ItemsSource="{Binding InputLogs}" SelectedItem="{Binding SelectedInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Ticket" DisplayMemberPath="Ticket"/>
                 <TextBox Text="{Binding Ticket, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="200" mah:TextBoxHelper.Watermark="Ticket"/>
 
             </StackPanel>

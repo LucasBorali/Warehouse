@@ -20,7 +20,15 @@ namespace Warehouse.ViewModels
         }
 
         [ObservableProperty]
-        private ObservableCollection<Input> inputLogs = new ObservableCollection<Input>();
+        private ObservableCollection<Input> inputLogs = new();
+
+        [ObservableProperty]
+        private ObservableCollection<string> producers = new();
+
+        [ObservableProperty]
+        private ObservableCollection<string> tickets = new();
+
+
 
         private async Task LoadInputLogs()
         {
@@ -30,7 +38,36 @@ namespace Warehouse.ViewModels
             {
                 InputLogs.Add(dock);
             }
+
+            Producers = new ObservableCollection<string>(InputLogs.Select(i => i.Producer).Distinct());
+
+
         }
+
+        [ObservableProperty]
+        private Input selectedProducer;
+
+        [ObservableProperty]
+        private Input selectedticket;
+
+        partial void OnSelectedProducerChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                var filteredTickets = InputLogs
+                    .Where(i => i.Producer == value)
+                    .Select(i => i.Ticket)
+                    .Distinct();
+                Tickets = new ObservableCollection<string>(filteredTickets);
+            }
+            else
+            {
+                Tickets.Clear();
+            }
+        }
+
+      
+
 
 
 
