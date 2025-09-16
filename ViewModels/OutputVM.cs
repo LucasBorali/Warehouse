@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Warehouse.Models;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace Warehouse.ViewModels
 {
@@ -45,10 +46,10 @@ namespace Warehouse.ViewModels
         }
 
         [ObservableProperty]
-        private Input selectedProducer;
+        private string selectedProducer;
 
         [ObservableProperty]
-        private Input selectedticket;
+        private string selectedticket;
 
         partial void OnSelectedProducerChanged(string value)
         {

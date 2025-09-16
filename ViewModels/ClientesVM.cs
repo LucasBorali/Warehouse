@@ -35,7 +35,7 @@ namespace Warehouse.ViewModels
 
         //comandos
 
-        partial void OnSelectedCustomerChanged(Customer? value)
+        partial void OnSelectedCustomerChanged(Customer value)
         {
             if(value != null)
             {
