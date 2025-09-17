@@ -57,7 +57,27 @@
 
             </StackPanel>
 
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 15 0 0">
+                <Button Content="Retirar" Cursor="Hand" Command="{Binding AddOutputLogCommand}"/>
+            </StackPanel>
+
         </StackPanel>
+
+        <DataGrid x:Name="ClientesDataGrid" Grid.Row="2"
+   
+           Margin="15"
+           CanUserAddRows="False"
+           CanUserDeleteRows="False"
+           IsReadOnly="True" ItemsSource="{Binding OutputLogs}"
+               AutoGenerateColumns="True"
+                  ColumnWidth="*"
+                   HorizontalAlignment="Stretch"
+           >
+
+
+
+        </DataGrid>
+
 
     </Grid>
 </UserControl>
